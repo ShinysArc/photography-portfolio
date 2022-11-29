@@ -3,7 +3,7 @@ import React from 'react'
 export default function CameraIcon() {
     return (
         <svg
-            className="w-6 inline-block transition-transform group-hover:rotate-[15deg]"
+            className="w-4 inline-block transition-transform group-hover:rotate-[15deg]"
             viewBox="0 0 20 18"
             fill="currentColor"
         >
