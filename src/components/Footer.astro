@@ -1,13 +1,12 @@
 ---
+import { HOMEPAGE_URL } from '../config'
+
 const today = new Date();
 ---
 
-<footer>
-	&copy; {today.getFullYear()} St&eacutephane Gelibert. Tous droits réservés.
+<footer class="text-zinc-500 p-4 text-center">
+	&copy; {today.getFullYear()}
+    <a href={HOMEPAGE_URL}>
+        St&eacutephane Gelibert
+    </a>. Tous droits réservés.
 </footer>
-<style>
-	footer {
-		padding: 25px;
-		text-align: center;
-	}
-</style>
