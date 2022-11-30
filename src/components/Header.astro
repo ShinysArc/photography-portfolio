@@ -1,9 +1,10 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { HOMEPAGE_URL } from '../config';
-import { IoLogoGithub } from 'react-icons/io5/index.js'
-import CameraIcon from './icons/camera'
+import { IoLogoGithub } from 'react-icons/io5/index.js';
+import CameraIcon from './icons/camera';
 import ThemeToggle from './ThemeToggleButton';
+import DropdownMenu from './DropdownMenu';
 ---
 
 <header class="fixed w-full p2 z-20 backdrop-blur-md">
@@ -20,7 +21,8 @@ import ThemeToggle from './ThemeToggleButton';
                 <HeaderLink href="https://github.com/ShinysArc/photography-portfolio" target="_blank"><IoLogoGithub />Source</HeaderLink>
             </div>
             <div class="flex-1"></div>
-            <ThemeToggle client:load />
+            <ThemeToggle client:visible />
+            <DropdownMenu client:visible />
         </nav>
     </div>
 </header>
