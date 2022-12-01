@@ -27,13 +27,13 @@ export default function DropdownMenu() {
                     <div className="px-3 py-2 uppercase font-bold text-xs">
                         Catégories
                     </div>
-                    <DropdownMenuItem href="/categories/Category_1">
+                    <DropdownMenuItem href="/categories/category_1">
                         Catégorie 1
                     </DropdownMenuItem>
-                    <DropdownMenuItem href="/categories/Category_2">
+                    <DropdownMenuItem href="/categories/category_2">
                         Catégorie 2
                     </DropdownMenuItem>
-                    <DropdownMenuItem href="/categories/Category_3">
+                    <DropdownMenuItem href="/categories/category_3">
                         Catégorie 3
                     </DropdownMenuItem>
                 </div>
