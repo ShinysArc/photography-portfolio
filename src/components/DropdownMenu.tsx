@@ -36,6 +36,9 @@ export default function DropdownMenu() {
                     <DropdownMenuItem href="/categories/category_3">
                         Catégorie 3
                     </DropdownMenuItem>
+                    <DropdownMenuItem href="/categories/materiel">
+                        Matériel
+                    </DropdownMenuItem>
                 </div>
             </Menu.Items>
         </Transition>

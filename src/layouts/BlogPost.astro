@@ -11,7 +11,7 @@ export interface Props {
 		createdAt?: string;
 		updatedAt?: string;
 		heroImage?: string;
-		tages?: string[];
+		tags?: string[];
 	};
 }
 const {
@@ -43,6 +43,16 @@ const {
 				<div>{description}</div>
 				<hr class="border-top border-sinc-400 my-4" />
 				<slot />
+				<div class="flex overflow-visible overflow-x-scroll scrollbar-hide scrolling-touch">
+					<img class="border border-slate-300 dark:border-sinc-700 rounded-xl"
+						src={heroImage}
+						alt=""
+					/>
+					<img class="border border-slate-300 dark:border-sinc-700 rounded-xl"
+						src={heroImage}
+						alt=""
+					/>
+				</div>
 				<span
 					class="underline
 					underline-offset-2
