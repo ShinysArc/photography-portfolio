@@ -149,13 +149,8 @@ a img {
     font-size: 1.7em;
 }
 
-.header-404 {
-    justify-content: center;
-    display: grid;
-}
-
 .body-404 {
-    margin-top: 20vh;
+    margin-top: -10vh;
 }
 
 /* Portfolio list */
