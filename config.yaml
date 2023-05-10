@@ -1,0 +1,64 @@
+baseURL: https://photo.stephanegelibert.com/ # todo: change site url.
+title: Portfolio # todo: change site name.
+defaultContentLanguage: 'fr'
+theme: eternity
+googleAnalytics: '' # todo: set your analytics id.
+
+params:
+  image: /images/banner.png
+  logo: logo.png # todo: add your custom logo to static/
+  subtitle: Portfolio de Stéphane Gelibert # todo: change default subtitle for your website.
+  copyright: Tous droits réservés. # todo: set your copyright type.
+  author: Stéphane Gelibert # todo: set your full name.
+  dontShowSource: true # please, do not do this :)
+  portfolio:
+    columns:
+      desktop:
+        nature: 4
+        archive: 6
+        people: 2
+        default: 3
+      mobile:
+        default: 2
+        archive: 3
+        people: 1
+  socials:
+    - icon: 'far fa-envelope fa-lg'
+      url: 'mailto:contact@stephanegelibert.com'
+      landing: true
+    - icon: 'fab fa-instagram fa-lg'
+      url: 'https://instagram.com/shinysarc'
+  homepage: "/work" # homepage link, mostly same with menu.main[0]
+  specialPages:
+    - work
+    - archive
+  bypassWelcomePage: true # redirects "/" to "homepage" when it's true.
+  disableWelcomePageBackground: false # disables the background image on the homepage
+  plausible: '' # todo: set your plausible id.
+  disableRadius: false
+  moveIt: false  # Moves Title and Meta info down, only visible when scroll.
+  disableAlwaysResize: false
+
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      unsafe: true
+
+taxonomies:
+  tag: tags
+
+permalinks:
+  work: ":filename/"
+
+menu:
+  main:
+    - name: work
+      url: /work/
+      weight: 1
+    - name: people
+      url: /tags/people/
+      weight: 2
+    - name: about
+      url: /about/
+      weight: 3
