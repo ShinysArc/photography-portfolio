@@ -5,4 +5,5 @@ images:
 title: Singer 2
 tags:
 - portrait
+- archive
 ---

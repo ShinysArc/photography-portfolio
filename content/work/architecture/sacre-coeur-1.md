@@ -5,4 +5,5 @@ images:
 title: Sacré Coeur 1
 tags:
 - architecture
+- archive
 ---

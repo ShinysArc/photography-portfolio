@@ -5,4 +5,5 @@ images:
 title: Street 1
 tags:
 - street
+- archive
 ---

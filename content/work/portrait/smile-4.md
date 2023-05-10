@@ -5,4 +5,5 @@ images:
 title: Smile 4
 tags:
 - portrait
+- archive
 ---

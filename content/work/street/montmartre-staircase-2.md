@@ -6,4 +6,5 @@ title: Montmartre staircase 2
 tags:
 - street
 - work
+- archive
 ---

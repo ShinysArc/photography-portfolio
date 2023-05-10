@@ -5,4 +5,5 @@ images:
 title: Window
 tags:
 - street
+- archive
 ---

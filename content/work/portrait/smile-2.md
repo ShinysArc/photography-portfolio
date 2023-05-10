@@ -6,4 +6,5 @@ images:
 title: Smile 2
 tags:
 - portrait
+- archive
 ---

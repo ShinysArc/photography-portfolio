@@ -5,4 +5,5 @@ images:
 title: Photographe 6
 tags:
 - portrait
+- archive
 ---

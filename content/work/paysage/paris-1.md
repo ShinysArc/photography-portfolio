@@ -5,4 +5,5 @@ images:
 title: Paris 1
 tags:
 - paysage
+- archive
 ---

@@ -8,4 +8,5 @@ title: Smoke 2
 tags:
 - portrait
 - work
+- archive
 ---

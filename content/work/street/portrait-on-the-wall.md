@@ -5,4 +5,5 @@ images:
 title: Portrait on the wall
 tags:
 - street
+- archive
 ---

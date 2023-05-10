@@ -5,4 +5,5 @@ images:
 title: Smoke 1
 tags:
 - portrait
+- archive
 ---

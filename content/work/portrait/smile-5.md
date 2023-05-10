@@ -5,4 +5,5 @@ images:
 title: Smile 5
 tags:
 - portrait
+- archive
 ---

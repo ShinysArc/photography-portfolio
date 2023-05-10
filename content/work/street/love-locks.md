@@ -5,4 +5,5 @@ images:
 title: Love locks
 tags:
 - street
+- archive
 ---

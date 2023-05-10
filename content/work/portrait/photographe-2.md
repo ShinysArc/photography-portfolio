@@ -6,4 +6,5 @@ images:
 title: Photographe 2
 tags:
 - portrait
+- archive
 ---
