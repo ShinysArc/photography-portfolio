@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="navbar-middle">
-        <a class="a-clean" href={{ relref . $homeLink }}><p class="welcome-title">{{ .Site.Title }}</p></a>
+        <a class="a-clean" href={{ relref . $homeLink }}><strong><p class="welcome-title">{{ .Site.Title }}</p></strong></a>
         {{ if not .IsHome }}
             {{ if and .Site.Menus .Site.Menus.main }}
                 <div class="menu">
@@ -22,7 +22,7 @@
                         {{ if eq $el.URL $currentPage }}
                             {{ $active = "active" }}
                         {{ end }}
-                        <a class="{{ $active }}" href="{{ $el.URL }}">{{ $el.Name }}</a>
+                        <a class="{{ $active }}" href="{{ $el.URL }}">{{ $el.Name | title }}</a>
                         {{ if ne $i $lastIndex }} / {{ end }}
                     {{ end }}
                 </div>

@@ -313,7 +313,7 @@ section .column img {
 .exif {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: small;
+    font-size: medium;
     color: rgb(211, 211, 211);
 }
 
