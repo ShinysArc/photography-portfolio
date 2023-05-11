@@ -1,5 +1,5 @@
 baseURL: https://photo.stephanegelibert.com/ # todo: change site url.
-title: Portfolio de Stéphane Gelibert # todo: change site name.
+title: Portfolio # todo: change site name.
 defaultContentLanguage: 'fr'
 theme: eternity
 googleAnalytics: '' # todo: set your analytics id.
