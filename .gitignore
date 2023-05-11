@@ -19,4 +19,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# generated files
 resources/_gen/
+
+# public directory
+public/
