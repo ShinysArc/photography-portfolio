@@ -1,20 +1,20 @@
 <meta name="description" content="{{ if .Params.Subtitle }}{{ .Params.Subtitle }}{{else}}{{ .Site.Params.Subtitle }}{{ end }}" />
 
 <title itemprop="name">{{ default .Site.Title .Title|title }}</title>
-<meta property="og:title" content="{{ default .Site.Title .Title }}" />
-<meta name="twitter:title" content="{{ default .Site.Title .Title }}" />
-<meta itemprop="name" content="{{ default .Site.Title .Title }}" />
-<meta property="og:site_name" content="{{ .Site.Params.sitename }}" />
-<meta name="description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
-<meta itemprop="description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
-<meta property="og:description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
-<meta name="twitter:description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
+<meta property="og:title" content="{{ default .Site.Title .Title|title }}" />
+<meta name="twitter:title" content="{{ default .Site.Title .Title|title }}" />
+<meta itemprop="name" content="{{ default .Site.Title .Title|title }}" />
+<meta property="og:site_name" content="{{ .Site.Params.sitename|title }}" />
+<meta name="description" content="{{ default .Site.Params.Subtitle .Params.Subtitle|title }}" />
+<meta itemprop="description" content="{{ default .Site.Params.Subtitle .Params.Subtitle|title }}" />
+<meta property="og:description" content="{{ default .Site.Params.Subtitle .Params.Subtitle|title }}" />
+<meta name="twitter:description" content="{{ default .Site.Params.Subtitle .Params.Subtitle|title }}" />
 <base href="{{ .RelPermalink }}">
 <link rel="canonical" href="{{ .Permalink }}" itemprop="url" />
 <meta name="url" content="{{ .Permalink }}" />
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta name="twitter:url" content="{{ .Permalink }}" />
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 {{ with .Site.Params.Author }}
     <meta name="twitter:creator" content="{{ . }}" />
 {{ end }}
@@ -29,7 +29,7 @@
     {{ $img = $scratch.Get "img" }}
 {{ end }}
 {{ with $img }}
-    {{ $i := .Fill "1600x836 center png" }}
+    {{ $i := .Fill "800x418 center png" }}
     <meta itemprop="image" content="{{ $i.Permalink }}" />
     <meta property="og:image" content="{{ $i.Permalink }}" />
     <meta name="twitter:image" content="{{ $i.Permalink }}" />
