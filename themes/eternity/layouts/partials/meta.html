@@ -1,10 +1,10 @@
 <meta name="description" content="{{ if .Params.Subtitle }}{{ .Params.Subtitle }}{{else}}{{ .Site.Params.Subtitle }}{{ end }}" />
 
 <title itemprop="name">{{ default .Site.Title .Title|title }}</title>
-<meta property="og:title" content="{{ default .Site.Title .Title|title }}" />
-<meta name="twitter:title" content="{{ default .Site.Title .Title|title }}" />
-<meta itemprop="name" content="{{ default .Site.Title .Title|title }}" />
-<meta property="og:site_name" content="{{ .Site.Params.sitename|title }}" />
+<meta property="og:title" content="{{ default .Site.Title .Title }}" />
+<meta name="twitter:title" content="{{ default .Site.Title .Title }}" />
+<meta itemprop="name" content="{{ default .Site.Title .Title }}" />
+<meta property="og:site_name" content="{{ .Site.Params.sitename }}" />
 <meta name="description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
 <meta itemprop="description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
 <meta property="og:description" content="{{ default .Site.Params.Subtitle .Params.Subtitle }}" />
