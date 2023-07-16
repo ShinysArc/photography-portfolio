@@ -7,6 +7,5 @@ title: Under the light
 tags:
 - portrait
 - street
-- work
 - archive
 ---

@@ -65,9 +65,12 @@ menu:
     - name: paysage
       url: /tags/paysage/
       weight: 4
+    - name: architecture
+      url: /tags/architecture/
+      weight: 5
     - name: archive
       url: /tags/archive/
-      weight: 5
+      weight: 6
     - name: à propos
       url: https://stephanegelibert.com/
-      weight: 6
+      weight: 7
