@@ -1,14 +1,18 @@
 // pages/index.js
 
+import React from 'react';
 import Gallery from '../components/Gallery';
-import Header from '@/components/Header';
-import styles from '../styles/Home.module.css';
 import fetch from 'node-fetch';
 
 export default function Home({ imagesData }) {
+  // Define inline styles
+  const mainStyle = {
+    padding: '2rem',
+  };
+
   return (
     <>
-      <main className={styles.main}>
+      <main style={mainStyle}>
         <Gallery imagesData={imagesData} />
       </main>
     </>
@@ -70,7 +74,6 @@ export async function getStaticProps() {
 
   const exifr = require('exifr');
   const sizeOf = require('image-size');
-  //const fetch = require('node-fetch');
 
   const imagesData = [];
 
