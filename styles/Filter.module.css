@@ -1,0 +1,34 @@
+/* styles/Filter.module.css */
+
+.filter {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    margin: 0 1rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    position: relative;
+  }
+  
+  .button::after {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    background: #000;
+    transition: width 0.3s;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+  }
+  
+  .button:hover::after,
+  .button.active::after {
+    width: 100%;
+  }
+  

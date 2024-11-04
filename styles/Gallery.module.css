@@ -1,0 +1,18 @@
+/* styles/Gallery.module.css */
+
+.gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .masonryGrid {
+    display: flex;
+    margin-left: auto; /* gutter size offset */
+    width: auto;
+  }
+  
+  .masonryGridColumn {
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+  }
+  
