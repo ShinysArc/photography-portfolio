@@ -1,13 +1,16 @@
 // pages/_app.js
 
-import Header from '@/components/Header';
-import { ChakraProvider, localStorageManager } from '@chakra-ui/react';
+import '../styles/globals.css'
+import Main from '@/components/layout/main';
+import theme from '@/lib/theme';
+import { ChakraProvider } from '@chakra-ui/react';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   return (
-    <ChakraProvider colorModeManager={localStorageManager}>
-      <Header />
-      <Component {...pageProps} />
+    <ChakraProvider theme={theme}>
+      <Main router={router}>
+        <Component {...pageProps} />
+      </Main>
     </ChakraProvider>
   );
 }

@@ -2,7 +2,9 @@
 
 module.exports = {
     images: {
-      domains: ['photo.stephanegelibert.com'],
+      remotePatterns: [{
+        hostname:'photo.stephanegelibert.com'
+      }],
     },
   };
   

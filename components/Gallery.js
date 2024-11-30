@@ -37,30 +37,8 @@ export default function Gallery({ imagesData }) {
     padding: '20px', // Optional padding
   };
 
-  // Since react-masonry-css relies on class names, we'll inject the CSS within the component
-  const masonryStyles = `
-    .masonryGrid {
-      display: flex;
-      margin-left: -30px; /* gutter size offset */
-      width: auto;
-    }
-
-    .masonryGridColumn {
-      padding-left: 30px; /* gutter size */
-      background-clip: padding-box;
-    }
-
-    /* Optional: Adjustments for images within the Masonry layout */
-    .masonryGridColumn > div {
-      margin-bottom: 30px;
-    }
-  `;
-
   return (
     <div style={galleryStyle}>
-      {/* Inject Masonry styles */}
-      <style>{masonryStyles}</style>
-
       <Filter activeFilter={activeFilter} onChange={handleFilterChange} />
       
       <Masonry
