@@ -1,0 +1,46 @@
+{
+  "name": "photo-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "refresh": "node scripts/refresh-cache.mjs",
+    "lint": "eslint . --ext .ts,.tsx,.js,.mjs --max-warnings=0",
+    "lint:fix": "eslint . --ext .ts,.tsx,.js,.mjs --fix",
+    "format": "prettier . --write",
+    "check": "eslint . --ext .ts,.tsx,.js,.mjs && prettier -c ."
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@types/nodemailer": "^7.0.1",
+    "@types/react": "^18.3.24",
+    "@types/react-dom": "^18.3.7",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "autoprefixer": "^10.4.19",
+    "clsx": "^2.1.1",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.5",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-unused-imports": "^3.2.0",
+    "framer-motion": "^12.23.15",
+    "lucide-react": "^0.544.0",
+    "next-themes": "^0.4.6",
+    "nodemailer": "^7.0.6",
+    "postcss": "^8.4.38",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.4.5"
+  }
+}

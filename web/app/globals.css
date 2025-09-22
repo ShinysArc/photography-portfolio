@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Color tokens (HSL triplets so Tailwind can add alpha) ---------- */
+:root {
+  /* light */
+  --color-surface: 40 20% 98%;      /* page bg: warm off-white */
+  --color-surface-2: 40 14% 96%;    /* subtle panels */
+  --color-card: 0 0% 100%;          /* cards/dialogs */
+  --color-border: 28 15% 85%;
+  --color-text: 24 10% 14%;
+  --color-text-muted: 25 7% 45%;
+  --color-accent: 182 50% 40%;      /* soft teal */
+  --color-accent-foreground: 0 0% 100%;
+  --container-w: 1200px;
+}
+
+.dark {
+  /* dark */
+  --color-surface: 24 9% 10%;       /* deep warm charcoal */
+  --color-surface-2: 24 8% 13%;
+  --color-card: 24 8% 16%;
+  --color-border: 24 6% 26%;
+  --color-text: 30 20% 94%;
+  --color-text-muted: 28 10% 70%;
+  --color-accent: 182 55% 45%;      /* brighter teal for dark */
+  --color-accent-foreground: 210 10% 10%;
+}
+
+/* Base application colors */
+@layer base {
+  html { scrollbar-gutter: stable; } /* prevent layout shift on modal open */
+  body {
+    @apply bg-surface text-text;
+  }
+}
+
+/* Basic focus outline */
+*:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-neutral-900;
+}
+
+/* Masonry helpers */
+.masonry {
+  column-gap: 1rem;
+}
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+/* Smooth theme change transitions (applied briefly via JS) */
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    fill 0.25s ease,
+    stroke 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none !important;
+  }
+}
