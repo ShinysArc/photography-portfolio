@@ -2,12 +2,11 @@ import './globals.css';
 import Providers from './providers';
 
 import Navbar from '@/components/Navbar';
-import PageTransition from '@/components/PageTransition';
 import SiteFooter from '@/components/SiteFooter';
 
 export const metadata = {
   title: 'Stéphane Gelibert - Portfolio',
-  description: 'Portfolio de Stéphane Gelibert',
+  description: 'Photography Portfolio',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -16,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <Navbar />
-          <PageTransition>{children}</PageTransition>
+          {children}
           <SiteFooter />
         </Providers>
       </body>

@@ -1,7 +1,6 @@
-// components/GearModal.tsx
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, Transition } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -15,10 +14,10 @@ type Props = {
   closeOnEsc?: boolean;
 };
 
-const TRANSITION = { duration: 0.22, ease: 'easeOut' };
+const TRANSITION: Transition = { duration: 0.22, ease: 'easeOut' };
 
-function srcFromPhoto(p: GearPhoto, q: 'preview' | 'full' = 'full') {
-  return p.kind === 'immich' ? `/api/img/${p.assetId}?q=${q}` : p.src;
+function srcFromPhoto(p: GearPhoto, q: 'preview' | 'fullsize' = 'fullsize') {
+  return p.kind === 'immich' ? `/i/${p.assetId}?q=${q}` : p.src;
 }
 
 export default function GearModal({
@@ -87,10 +86,10 @@ export default function GearModal({
             >
               <button
                 onClick={onClose}
-                className="absolute right-3 top-3 rounded-md bg-neutral-100 px-2 py-1 text-sm hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
+                className="absolute right-3 top-3 rounded-full bg-neutral-100 px-2 py-1 text-sm hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
                 aria-label="Close"
               >
-                Close
+                &#x2715;
               </button>
 
               <motion.div
@@ -103,8 +102,8 @@ export default function GearModal({
                 <div className="lg:col-span-3">
                   {primary && (
                     <motion.img
-                      key={srcFromPhoto(primary, 'full')}
-                      src={srcFromPhoto(primary, 'full')}
+                      key={srcFromPhoto(primary, 'fullsize')}
+                      src={srcFromPhoto(primary, 'fullsize')}
                       alt={item.name}
                       className="h-auto w-full rounded-xl border border-neutral-200/60 dark:border-neutral-800/60"
                       initial={{ scale: 0.98, opacity: 0 }}

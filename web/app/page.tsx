@@ -16,18 +16,14 @@ export type Exif = {
   iso?: number;
   focalLength?: number;
   dateTimeOriginal?: string;
+  timeZone?: string;
   exifImageWidth?: number;
   exifImageHeight?: number;
 };
 
 export type Item = {
   id: string;
-  width?: number;
-  height?: number;
   originalFileName?: string;
-  originalMimeType?: string;
-  fileCreatedAt?: string;
-  fileModifiedAt?: string;
   exif: Exif;
   tags: Tag[];
 };
@@ -82,7 +78,7 @@ export default function Page() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             <div className="lg:col-span-3">
               <img
-                src={`/api/img/${selected.id}?q=full`}
+                src={`/i/${selected.id}?q=fullsize`}
                 alt={selected.originalFileName || ''}
                 className="w-full h-auto rounded-xl shadow"
               />
@@ -105,7 +101,11 @@ export default function Page() {
                 <dt className="opacity-70">Taken</dt>
                 <dd>
                   {selected.exif.dateTimeOriginal
-                    ? new Date(selected.exif.dateTimeOriginal).toLocaleString()
+                    ? new Date(selected.exif.dateTimeOriginal).toLocaleString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })
                     : '—'}
                 </dd>
               </dl>

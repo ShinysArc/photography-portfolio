@@ -1,6 +1,5 @@
-// data/gear.ts
 export type GearPhoto =
-  | { kind: 'immich'; assetId: string } // served via /api/img/:id
+  | { kind: 'immich'; assetId: string } // served via /i/:id
   | { kind: 'url'; src: string }; // served from /public or any URL
 
 export type GearItem = {

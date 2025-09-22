@@ -1,4 +1,3 @@
-// components/ThemeToggle.tsx
 'use client';
 
 import { useTheme } from 'next-themes';
@@ -11,12 +10,10 @@ export function ThemeToggle() {
 
   useEffect(() => setMounted(true), []);
 
-  // Only decide dark/light after mount to avoid SSR/CSR mismatch.
-  const isDark = mounted ? (theme === 'dark' || resolvedTheme === 'dark') : false;
+  const isDark = mounted ? theme === 'dark' || resolvedTheme === 'dark' : false;
 
   const handleClick = () => {
     const root = document.documentElement;
-    // nice theme-change animation if you added the CSS hook earlier
     root.classList.add('theme-transition');
     requestAnimationFrame(() => {
       setTheme(isDark ? 'light' : 'dark');
@@ -35,7 +32,6 @@ export function ThemeToggle() {
         className="relative inline-flex h-4 w-4 items-center justify-center"
         suppressHydrationWarning
       >
-        {/* Render BOTH icons to keep DOM identical across SSR/CSR */}
         <Sun
           className={`h-4 w-4 transition-opacity duration-200 ${isDark ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden={isDark}
