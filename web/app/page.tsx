@@ -3,10 +3,9 @@ import { useEffect, useMemo, useState } from 'react';
 
 import Masonry from '@/components/Masonry';
 import Modal from '@/components/Modal';
-import PhotoCard from '@/components/PhotoCard';
 import { TagFilter } from '@/components/TagFilter';
 
-export type Tag = { id: string; name: string; value?: string | null };
+export type Tag = { id: string; name?: string | null; value?: string | null };
 export type Exif = {
   make?: string;
   model?: string;
@@ -26,7 +25,10 @@ export type Item = {
   originalFileName?: string;
   exif: Exif;
   tags: Tag[];
+  previewPath?: string; // "preview/<id>.jpg"
+  fullsizePath?: string; // "fullsize/<id>.jpg"
 };
+
 export type Cache = { album: { id: string; name: string; assetCount: number }; items: Item[] };
 
 export default function Page() {
@@ -35,15 +37,24 @@ export default function Page() {
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch('/api/cache', { cache: 'no-store' })
-      .then((r) => r.json())
-      .then((j) => setData(j))
-      .catch(() => setData({ album: { id: '', name: 'Unknown', assetCount: 0 }, items: [] }));
+    (async () => {
+      try {
+        const res = await fetch('/photos/cache.json', { cache: 'no-store' });
+        const json = res.ok
+          ? await res.json()
+          : { album: { id: '', name: 'Unknown', assetCount: 0 }, items: [] };
+        setData(json);
+      } catch {
+        setData({ album: { id: '', name: 'Unknown', assetCount: 0 }, items: [] });
+      }
+    })();
   }, []);
 
   const allTags = useMemo(() => {
     const set = new Map<string, string>();
-    data?.items.forEach((it) => it.tags?.forEach((t) => set.set(t.id, t.name || t.value || 'tag')));
+    data?.items.forEach((it) =>
+      it.tags?.forEach((t) => set.set(t.id, (t.name || t.value || 'tag').toString())),
+    );
     return Array.from(set, ([id, label]) => ({ id, label })).sort((a, b) =>
       a.label.localeCompare(b.label),
     );
@@ -51,9 +62,10 @@ export default function Page() {
 
   const filtered = useMemo(() => {
     if (!data) return [];
-    if (activeTags.length === 0) return data.items;
-    const want = new Set(activeTags);
-    return data.items.filter((it) => (it.tags || []).some((t) => want.has(t.id)));
+    const base = activeTags.length
+      ? data.items.filter((it) => it.tags?.some((t) => activeTags.includes(t.id)))
+      : data.items;
+    return base.filter((it) => !!it.previewPath);
   }, [data, activeTags]);
 
   return (
@@ -61,33 +73,47 @@ export default function Page() {
       <div className="flex flex-col md:flex-row md:items-end gap-4">
         <div>
           <h1 className="text-2xl font-bold">{data?.album?.name || 'Album'}</h1>
-          <p className="text-sm opacity-80">{data?.items?.length ?? 0} photos</p>
+          <p className="text-sm opacity-80">
+            {filtered.length} photo{filtered.length === 1 ? '' : 's'}
+          </p>
         </div>
         <div className="flex-1" />
-        <TagFilter tags={allTags} active={activeTags} onChange={(next) => setActiveTags(next)} />
+        <TagFilter tags={allTags} active={activeTags} onChange={setActiveTags} />
       </div>
 
       <Masonry>
         {filtered.map((it) => (
-          <PhotoCard key={it.id} item={it} onClick={() => setSelected(it)} />
+          <button
+            key={it.id}
+            onClick={() => setSelected(it)}
+            className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
+          >
+            <img
+              src={`/photos/${it.previewPath}`}
+              alt={it.originalFileName || ''}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto rounded-lg object-cover"
+            />
+          </button>
         ))}
       </Masonry>
 
       <Modal open={!!selected} onClose={() => setSelected(null)}>
         {selected && (
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            <div className="lg:col-span-3">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
+            <div className="lg:col-span-3 flex items-center justify-center">
               <img
-                src={`/i/${selected.id}?q=fullsize`}
+                src={`/photos/${selected.fullsizePath || selected.previewPath}`}
                 alt={selected.originalFileName || ''}
-                className="w-full h-auto rounded-xl shadow"
+                className="max-h-full max-w-full object-contain rounded-xl shadow"
               />
             </div>
-            <div className="lg:col-span-2 space-y-2 text-sm">
+            <div className="lg:col-span-2 space-y-2 text-sm overflow-auto pr-1">
               <h3 className="text-lg font-semibold">EXIF</h3>
               <dl className="grid grid-cols-2 gap-y-2">
                 <dt className="opacity-70">Camera</dt>
-                <dd>{selected.exif.model}</dd>
+                <dd>{selected.exif.model || '—'}</dd>
                 <dt className="opacity-70">Lens</dt>
                 <dd>{selected.exif.lensModel || '—'}</dd>
                 <dt className="opacity-70">Aperture</dt>

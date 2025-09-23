@@ -5,7 +5,6 @@ const nextConfig = {
   async rewrites() {
     return [
       { source: '/api/:path*', destination: `${process.env.NEXT_PUBLIC_API_BASE}/api/:path*` },
-      { source: '/i/:id', destination: `${process.env.NEXT_PUBLIC_API_BASE}/api/img/:id` },
     ];
   },
 };
