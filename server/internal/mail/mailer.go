@@ -60,7 +60,7 @@ func (m *Mailer) Send(ctx context.Context, replyTo, subject, text, html string) 
 		return fmt.Errorf("to: %w", err)
 	}
 	if replyTo != "" {
-		msg.SetHeader("Reply-To", replyTo)
+		msg.SetGenHeader("Reply-To", replyTo)
 	}
 	msg.Subject(subject)
 

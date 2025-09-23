@@ -3,6 +3,7 @@ package cache
 import (
 	"context"
 	"encoding/json"
+	"log"
 	"os"
 	"path/filepath"
 	"sync"
@@ -17,6 +18,8 @@ type Item struct {
 	OriginalFileName *string      `json:"originalFileName,omitempty"`
 	Exif             immich.Exif  `json:"exif"`
 	Tags             []immich.Tag `json:"tags"`
+	PreviewPath      string       `json:"previewPath,omitempty"`  // "preview/<id>.jpg"
+	FullsizePath     string       `json:"fullsizePath,omitempty"` // "fullsize/<id>.jpg"
 }
 
 type File struct {
@@ -107,16 +110,7 @@ func Refresh(ctx context.Context, cfg config.Config) (File, error) {
 		out.Items[r.i] = r.item
 	}
 
-	// Write metadata cache
-	if err := EnsureDir(cfg); err != nil {
-		return File{}, err
-	}
-	b, _ := json.MarshalIndent(out, "", "  ")
-	if err := os.WriteFile(path(cfg), b, 0o644); err != nil {
-		return File{}, err
-	}
-
-	// Prefetch both variants and prune stale files ----
+	// Prefetch files & prune
 	_ = store.EnsureDirs(cfg)
 	_ = store.Prefetch(ctx, cfg, ids, []string{"preview", "fullsize"})
 	keep := make(map[string]struct{}, len(ids))
@@ -124,6 +118,26 @@ func Refresh(ctx context.Context, cfg config.Config) (File, error) {
 		keep[id] = struct{}{}
 	}
 	_ = store.Prune(cfg, keep)
+
+	// NEW: attach local file paths to items
+	if pathIdx, err := store.BuildPathIndex(cfg); err == nil {
+		for i := range out.Items {
+			if p, ok := pathIdx[out.Items[i].ID]; ok {
+				out.Items[i].PreviewPath = p.Preview
+				out.Items[i].FullsizePath = p.Fullsize
+			}
+		}
+	} else {
+		log.Printf("BuildPathIndex error: %v", err)
+	}
+
+	if err := EnsureDir(cfg); err != nil {
+		return File{}, err
+	}
+	b, _ := json.MarshalIndent(out, "", "  ")
+	if err := os.WriteFile(filepath.Join(cfg.DataDir, "cache.json"), b, 0o644); err != nil {
+		return File{}, err
+	}
 
 	return out, nil
 }

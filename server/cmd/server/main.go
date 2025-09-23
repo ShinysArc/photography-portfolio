@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"errors"
 	"log"
 	"net/http"
 	"time"
 
+	"github.com/ShinysArc/photography-portfolio/server/internal/cache"
 	"github.com/ShinysArc/photography-portfolio/server/internal/config"
 	"github.com/ShinysArc/photography-portfolio/server/internal/handlers"
 	"github.com/ShinysArc/photography-portfolio/server/internal/mail"
@@ -23,10 +25,24 @@ func main() {
 	mux := http.NewServeMux()
 	handlers.RegisterAll(mux, cfg, mailer)
 
-	// Order: Logging -> CORS -> Handlers
+	// Logging -> CORS -> Handlers
 	var handler http.Handler = mux
 	handler = middleware.WithLogging(handler)
 	handler = middleware.WithCORS(cfg.AllowOrigin, handler)
+
+	go func() {
+		start := time.Now()
+		log.Printf("startup refresh: begin")
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Minute)
+		defer cancel()
+
+		data, err := cache.Refresh(ctx, cfg)
+		if err != nil {
+			log.Printf("startup refresh: FAILED: %v", err)
+			return
+		}
+		log.Printf("startup refresh: OK album=%s items=%d in %s", data.Album.ID, len(data.Items), time.Since(start).Truncate(time.Millisecond))
+	}()
 
 	srv := &http.Server{
 		Addr:              ":" + cfg.Port,

@@ -41,7 +41,7 @@ var extFromMime = map[string]string{
 }
 
 func dirFor(cfg config.Config, variant string) string {
-	return filepath.Join(cfg.DataDir, "img", variant)
+	return filepath.Join(cfg.DataDir, variant)
 }
 
 func EnsureDirs(cfg config.Config) error {
@@ -49,11 +49,11 @@ func EnsureDirs(cfg config.Config) error {
 		if err := os.MkdirAll(dirFor(cfg, v), 0o755); err != nil {
 			return err
 		}
+		_ = os.Chmod(dirFor(cfg, v), 0o755)
 	}
 	return nil
 }
 
-// find local cached file for variant/id, returns path and mime if found.
 func FindCached(cfg config.Config, variant, id string) (string, string, bool) {
 	base := dirFor(cfg, variant)
 	for _, ext := range knownExts {
@@ -65,33 +65,37 @@ func FindCached(cfg config.Config, variant, id string) (string, string, bool) {
 	return "", "", false
 }
 
-// save file bytes using content-type to decide extension; returns full path.
 func saveFile(cfg config.Config, variant, id, contentType string, r io.Reader) (string, error) {
 	ext := extFromMime[strings.ToLower(strings.TrimSpace(contentType))]
 	if ext == "" {
-		ext = ".jpg" // default
+		ext = ".jpg"
 	}
 	dir := dirFor(cfg, variant)
+
 	tmp := filepath.Join(dir, id+".tmp")
 	out, err := os.Create(tmp)
 	if err != nil {
 		return "", err
 	}
 	if _, err := io.Copy(out, r); err != nil {
-		out.Close()
-		os.Remove(tmp)
+		_ = out.Close()
+		_ = os.Remove(tmp)
 		return "", err
 	}
 	if err := out.Close(); err != nil {
-		os.Remove(tmp)
+		_ = os.Remove(tmp)
 		return "", err
 	}
+
 	final := filepath.Join(dir, id+ext)
-	_ = os.Remove(final) // best-effort
+	_ = os.Remove(final)
 	if err := os.Rename(tmp, final); err != nil {
-		os.Remove(tmp)
+		_ = os.Remove(tmp)
 		return "", err
 	}
+
+	_ = os.Chmod(final, 0o644)
+
 	return final, nil
 }
 
@@ -104,7 +108,7 @@ func DownloadAndCache(ctx context.Context, cfg config.Config, id, variant string
 	if err != nil {
 		return "", "", err
 	}
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 	if res.StatusCode < 200 || res.StatusCode > 299 {
 		b, _ := io.ReadAll(res.Body)
 		return "", "", fmt.Errorf("download %s %s -> %s %s", variant, id, res.Status, string(b))

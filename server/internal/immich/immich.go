@@ -26,7 +26,7 @@ type Exif struct {
 	ISO             *int     `json:"iso,omitempty"`
 	FocalLength     *float64 `json:"focalLength,omitempty"`
 	DateTimeOrig    *string  `json:"dateTimeOriginal,omitempty"`
-	TimeZone		*string	 `json:"timeZone,omitempty"`
+	TimeZone        *string  `json:"timeZone,omitempty"`
 	ExifImageWidth  *int     `json:"exifImageWidth,omitempty"`
 	ExifImageHeight *int     `json:"exifImageHeight,omitempty"`
 }
@@ -59,7 +59,7 @@ func getJSON[T any](ctx context.Context, cfg config.Config, url string, v *T) er
 	if err != nil {
 		return err
 	}
-	defer res.Body.Close()
+	defer func() { _ = res.Body.Close() }()
 	if res.StatusCode < 200 || res.StatusCode > 299 {
 		b, _ := io.ReadAll(res.Body)
 		return fmt.Errorf("immich %s -> %s: %s", url, res.Status, string(b))
