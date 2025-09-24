@@ -17,25 +17,27 @@ export type GearGroup = {
 
 export const gear: GearGroup[] = [
   {
-    group: 'Cameras',
+    group: 'Camera',
     items: [
       {
         name: 'Canon R6 Mark II',
         photo: { kind: 'url', src: '/gear/canon_r6m2.jpg' },
         about:
-          'My workhorse body. I use it for travel and low light. Eye-AF plus the 24–70/2.8 covers 90% of what I shoot.',
-        note: 'lololol',
+          'I really like that camera for its great low-light performance, fast and accurate autofocus, and solid image quality in a compact full-frame body.',
+        note: 'My camera, perfect for my usage.',
       },
     ],
   },
   {
     group: 'Lenses',
-    items: [{ name: 'Tamron 35mm f/1.4', photo: { kind: 'url', src: '/gear/tamron_35mm.jpg' } }],
-  },
-  {
-    group: 'Accessories',
     items: [
-      { name: 'Peak Design Slide Lite', photo: { kind: 'url', src: '/gear/pd-slide-lite.jpg' } },
+      {
+        name: 'Tamron 35mm f/1.4',
+        photo: { kind: 'url', src: '/gear/tamron_35mm.jpg' },
+        about:
+          'I use the Tamron 35mm f/1.4 for its sharpness, fast aperture, and smooth, creamy bokeh that makes subjects stand out.',
+        note: 'Main prime lens',
+      },
     ],
   },
 ];

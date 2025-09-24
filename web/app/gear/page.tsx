@@ -1,4 +1,3 @@
-// app/gear/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -14,7 +13,7 @@ export default function GearPage() {
     <section className="space-y-8">
       <header>
         <h1 className="text-2xl font-bold">Gear</h1>
-        <p className="opacity-80">My current kit—click any item to read how I use it.</p>
+        <p className="opacity-80">My current gear, click any item to read how and why I use it.</p>
       </header>
 
       {gear.map((g) => (

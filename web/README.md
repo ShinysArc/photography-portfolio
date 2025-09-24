@@ -5,7 +5,7 @@ Frontend of my photography portfolio.
 ## Requirements
 
 - Node 18+ (20+ recommended)
-- Next.js 14 (App Router)
+- Next.js 14
 - TailwindCSS
 
 ## Setup
@@ -19,7 +19,7 @@ cp .env.local.example .env.production.local  # or create manually
 
 ```
 # Go API base used by Next rewrites
-NEXT_PUBLIC_API_BASE=http://localhost:8083
+NEXT_PUBLIC_API_BASE=http://server:8083
 ```
 
 - next.config.mjs (rewrites → Go API)
@@ -27,6 +27,8 @@ NEXT_PUBLIC_API_BASE=http://localhost:8083
 ```
 export default {
   async rewrites() {
+    reactStrictMode: true,
+    allowedDevOrigins: ['http://example.com'],
     return [
       { source: '/api/:path*', destination: `${process.env.NEXT_PUBLIC_API_BASE}/api/:path*` },
     ];

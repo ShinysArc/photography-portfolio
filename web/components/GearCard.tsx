@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 
 import type { GearItem } from '@/data/gear';
 
@@ -18,7 +19,7 @@ export default function GearCard({ item, onClick }: { item: GearItem; onClick: (
       )}
     >
       <div className="aspect-[4/3] overflow-hidden">
-        <img
+        <Image
           src={src}
           alt={item.name}
           loading="lazy"

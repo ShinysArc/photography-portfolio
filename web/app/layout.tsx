@@ -1,8 +1,9 @@
 import './globals.css';
-import Providers from './providers';
 
 import Navbar from '@/components/Navbar';
 import SiteFooter from '@/components/SiteFooter';
+
+import Providers from './providers';
 
 export const metadata = {
   title: 'Stéphane Gelibert - Portfolio',

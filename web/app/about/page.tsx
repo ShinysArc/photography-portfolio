@@ -1,12 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function AboutPage() {
   return (
     <section className="grid gap-8 md:grid-cols-3 items-start">
-      {/* Photo card */}
       <div className="md:col-span-1">
         <div className="relative w-full aspect-[4/5] overflow-hidden rounded-2xl border border-neutral-200/60 dark:border-neutral-800/60 bg-gradient-to-br from-neutral-200 to-neutral-300 dark:from-neutral-800 dark:to-neutral-900">
-          {/* Replace /me.jpg with your file in /public (e.g., public/me.jpg) */}
           <Image
             src="/me.jpg"
             alt="Portrait"
@@ -18,7 +17,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Text */}
       <article className="md:col-span-2 prose dark:prose-invert max-w-none">
         <h1 className="text-2xl font-bold mb-2">About</h1>
         <p>
@@ -31,7 +29,17 @@ export default function AboutPage() {
         </p>
         <p>
           On this site you’ll find selected projects, travel albums, and the gear I use. If you have
-          a question or a project in mind, feel free to reach out via the Contact page.
+          a question or a project in mind, feel free to reach out via the{' '}
+          <Link
+            href="/contact"
+            className="relative font-medium text-accent hover:text-accent/90
+                       underline decoration-accent/60 decoration-2 underline-offset-4
+                       transition-colors hover:decoration-accent hover:decoration-4
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-sm"
+          >
+            contact page
+          </Link>
+          .
         </p>
       </article>
     </section>

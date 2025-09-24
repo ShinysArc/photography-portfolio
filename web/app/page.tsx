@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
 import Masonry from '@/components/Masonry';
@@ -88,7 +89,7 @@ export default function Page() {
             onClick={() => setSelected(it)}
             className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
           >
-            <img
+            <Image
               src={`/photos/${it.previewPath}`}
               alt={it.originalFileName || ''}
               loading="lazy"
@@ -103,7 +104,7 @@ export default function Page() {
         {selected && (
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
             <div className="lg:col-span-3 flex items-center justify-center">
-              <img
+              <Image
                 src={`/photos/${selected.fullsizePath || selected.previewPath}`}
                 alt={selected.originalFileName || ''}
                 className="max-h-full max-w-full object-contain rounded-xl shadow"

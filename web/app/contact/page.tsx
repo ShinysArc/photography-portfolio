@@ -13,7 +13,6 @@ export default function ContactPage() {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-  // honeypot (hidden)
   const [hp, setHp] = useState('');
 
   useEffect(() => setStartedAt(Date.now()), []);
@@ -127,7 +126,7 @@ export default function ContactPage() {
             className={clsx(
               'rounded-md px-4 py-2 text-sm font-medium transition-colors',
               canSend
-                ? 'bg-black text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200'
+                ? 'bg-accent text-white hover:bg-accent/90 dark:decoration-accent/60 dark:text-black dark:hover:decoration-accent/80'
                 : 'bg-neutral-300 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500 cursor-not-allowed',
             )}
           >

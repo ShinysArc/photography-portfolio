@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, Transition } from 'framer-motion';
+import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -30,7 +31,6 @@ export default function GearModal({
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Lock scroll (no padding compensation — CSS reserves gutter)
   useEffect(() => {
     if (!open) return;
     const root = document.documentElement;
@@ -63,7 +63,6 @@ export default function GearModal({
     <AnimatePresence mode="wait">
       {open && item && (
         <div className="fixed inset-0 z-[9999]">
-          {/* Backdrop */}
           <motion.div
             className="absolute inset-0 bg-black/70"
             onClick={closeOnBackdrop ? onClose : undefined}
@@ -72,7 +71,6 @@ export default function GearModal({
             exit={{ opacity: 0 }}
             transition={TRANSITION}
           />
-          {/* Dialog */}
           <div className="relative z-10 flex h-full w-full items-center justify-center overflow-y-auto p-4 pt-[max(env(safe-area-inset-top),1rem)] pb-[max(env(safe-area-inset-bottom),1rem)]">
             <motion.div
               role="dialog"
@@ -127,7 +125,7 @@ export default function GearModal({
                             }`}
                             aria-label={`Thumbnail ${i + 1}`}
                           >
-                            <img
+                            <Image
                               src={srcFromPhoto(p, 'preview')}
                               alt=""
                               loading="lazy"
@@ -146,11 +144,6 @@ export default function GearModal({
                     <p className="whitespace-pre-wrap text-sm leading-6 opacity-90">{item.about}</p>
                   ) : (
                     <p className="text-sm opacity-70">No notes yet.</p>
-                  )}
-                  {item.note && (
-                    <p className="text-xs opacity-60">
-                      <strong>Note:</strong> {item.note}
-                    </p>
                   )}
                 </div>
               </motion.div>
