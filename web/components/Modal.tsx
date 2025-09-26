@@ -21,11 +21,9 @@ export default function Modal({
   closeOnEsc = true,
   closeOnBackdrop = true,
 }: ModalProps) {
-  // Only render on client (avoids hydration/SSR issues)
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  // Lock scroll while open
   useEffect(() => {
     if (!open) return;
     const prev = document.documentElement.style.overflow;
@@ -35,7 +33,6 @@ export default function Modal({
     };
   }, [open]);
 
-  // ESC to close
   useEffect(() => {
     if (!open || !closeOnEsc) return;
     const onKey = (e: KeyboardEvent) => {
@@ -60,13 +57,11 @@ export default function Modal({
             exit={{ opacity: 0 }}
           />
 
-          {/* Perfect centering wrapper */}
           <div className="relative z-10 flex h-full w-full items-center justify-center overflow-y-auto p-4 pt-[max(env(safe-area-inset-top),1rem)] pb-[max(env(safe-area-inset-bottom),1rem)]">
-            {/* Dialog */}
             <motion.div
               role="dialog"
               aria-modal="true"
-              className="relative w-full max-w-6xl max-h-[90vh] overflow-auto rounded-xl bg-white p-4 shadow-xl dark:bg-neutral-900"
+              className="relative max-w-[95vw] max-h-[90vh] overflow-auto rounded-xl bg-white p-4 shadow-xl dark:bg-neutral-900"
               initial={{ y: 16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 16, opacity: 0 }}

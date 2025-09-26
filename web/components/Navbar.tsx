@@ -1,6 +1,6 @@
 'use client';
 
-import { Camera, Info, Settings2 } from 'lucide-react';
+import { Camera, Info, Settings2, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 import { ThemeToggle } from './ThemeToggle';
@@ -16,23 +16,23 @@ export default function Navbar() {
           <Link
             href="/about"
             prefetch
-            className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100"
+            className="flex items-center gap-1 text-sm opacity-80 hover:opacity-100"
           >
             <Info className="h-4 w-4" /> About
           </Link>
           <Link
             href="/gear"
             prefetch
-            className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100"
+            className="flex items-center gap-1 text-sm opacity-80 hover:opacity-100"
           >
             <Settings2 className="h-4 w-4" /> Gear
           </Link>
           <Link
             href="/contact"
             prefetch
-            className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100"
+            className="flex items-center gap-1 text-sm opacity-80 hover:opacity-100"
           >
-            Contact
+            <Mail className="h-4 w-4" /> Contact
           </Link>
         </div>
         <ThemeToggle />

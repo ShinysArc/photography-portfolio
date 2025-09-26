@@ -40,7 +40,7 @@ export default function Page() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch('/photos/cache.json', { cache: 'no-store' });
+        const res = await fetch('./photos/cache.json', { cache: 'force-cache' });
         const json = res.ok
           ? await res.json()
           : { album: { id: '', name: 'Unknown', assetCount: 0 }, items: [] };
@@ -93,8 +93,7 @@ export default function Page() {
               src={`/photos/${it.previewPath}`}
               alt={it.originalFileName || ''}
               loading="lazy"
-              decoding="async"
-              className="w-full h-auto rounded-lg object-cover"
+              className="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-[1.02]"
             />
           </button>
         ))}
@@ -102,15 +101,15 @@ export default function Page() {
 
       <Modal open={!!selected} onClose={() => setSelected(null)}>
         {selected && (
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 h-full">
-            <div className="lg:col-span-3 flex items-center justify-center">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-y-6 lg:gap-x-4">
+            <div className="shrink-0">
               <Image
                 src={`/photos/${selected.fullsizePath || selected.previewPath}`}
                 alt={selected.originalFileName || ''}
-                className="max-h-full max-w-full object-contain rounded-xl shadow"
+                className="max-h-[85vh] max-w-[85vw] h-auto w-auto object-contain rounded-xl shadow"
               />
             </div>
-            <div className="lg:col-span-2 space-y-2 text-sm overflow-auto pr-1">
+            <div className="min-w-[260px] lg:max-w-[40vw] grow overflow-auto space-y-2 text-sm">
               <h3 className="text-lg font-semibold">EXIF</h3>
               <dl className="grid grid-cols-2 gap-y-2">
                 <dt className="opacity-70">Camera</dt>
