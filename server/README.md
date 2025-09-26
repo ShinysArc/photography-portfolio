@@ -8,17 +8,16 @@ A compact Go service that talks to **Immich**, builds a JSON metadata cache, **d
 |---|---|---|
 | GET  | /healthz              | 204 liveness |
 | GET  | /api/cache            | Album + items JSON (tags, EXIF, filenames, sizes) |
-| POST | /api/refresh          | Rebuild cache **and** prefetch image variants (`preview`, `fullsize`). Requires `x-admin-token`. |
+| POST | /api/refresh          | Rebuild cache **and** prefetch images. Requires `x-admin-token`. |
 | POST | /api/contact          | Send email via SMTP (go-mail). Payload: `{ name, email, subject, message, hp?, startedAt? }` |
 
 ## Image caching
 
-- Stored under `DATA_DIR/img/{preview,fullsize}/<assetID>.<ext>`
-- `preview` and `fullsize` come from Immich **thumbnail** endpoints (never original).
+- Stored under `DATA_DIR/preview/<assetID>.<ext>`
 - `/api/refresh` flow:
   1) Read album + asset IDs  
   2) Write `data/cache.json` metadata  
-  3) **Prefetch** missing preview/fullsize files  
+  3) **Prefetch** missing files  
   4) **Prune** local files for assets no longer in the album
 
 ## Requirements
@@ -104,7 +103,5 @@ curl -X POST http://localhost:8083/api/contact \
 DATA_DIR/
   cache.json
   preview/
-    <id>.jpg|.webp|.png|.avif
-  fullsize/
     <id>.jpg|.webp|.png|.avif
 ```

@@ -14,7 +14,7 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3000
 
 # Copy build output
 COPY --from=builder /app/.next ./.next

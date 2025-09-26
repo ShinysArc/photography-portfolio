@@ -27,7 +27,6 @@ export type Item = {
   exif: Exif;
   tags: Tag[];
   previewPath?: string; // "preview/<id>.jpg"
-  fullsizePath?: string; // "fullsize/<id>.jpg"
 };
 
 export type Cache = { album: { id: string; name: string; assetCount: number }; items: Item[] };
@@ -104,7 +103,7 @@ export default function Page() {
           <div className="flex flex-col lg:flex-row lg:items-start gap-y-6 lg:gap-x-4">
             <div className="shrink-0">
               <Image
-                src={`/photos/${selected.fullsizePath || selected.previewPath}`}
+                src={`/photos/${selected.previewPath}`}
                 alt={selected.originalFileName || ''}
                 className="max-h-[85vh] max-w-[85vw] h-auto w-auto object-contain rounded-xl shadow"
               />

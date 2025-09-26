@@ -17,7 +17,7 @@ type Props = {
 
 const TRANSITION: Transition = { duration: 0.22, ease: 'easeOut' };
 
-function srcFromPhoto(p: GearPhoto, q: 'preview' | 'fullsize' = 'fullsize') {
+function srcFromPhoto(p: GearPhoto, q: 'preview' = 'preview') {
   return p.kind === 'immich' ? `/i/${p.assetId}?q=${q}` : p.src;
 }
 
@@ -100,8 +100,8 @@ export default function GearModal({
                 <div className="lg:col-span-3">
                   {primary && (
                     <motion.img
-                      key={srcFromPhoto(primary, 'fullsize')}
-                      src={srcFromPhoto(primary, 'fullsize')}
+                      key={srcFromPhoto(primary, 'preview')}
+                      src={srcFromPhoto(primary, 'preview')}
                       alt={item.name}
                       className="h-auto w-full rounded-xl border border-neutral-200/60 dark:border-neutral-800/60"
                       initial={{ scale: 0.98, opacity: 0 }}

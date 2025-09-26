@@ -4,8 +4,8 @@ My photography portfolio, it fetches from **Immich**, pre-caches images on a **G
 
 ## ✨ Highlights
 
-- Zero hotlinking: Go server downloads & serves local **preview** and **fullsize** variants.
-- Fast gallery: Masonry grid uses low-weight previews; modal shows larger fullsize.
+- Zero hotlinking: Go server downloads & serves local **previews**.
+- Fast gallery: Frontend uses low-weight previews.
 - Rich metadata: EXIF panel, Immich album name, and tag filtering.
 - Animations: Page transitions (no blip) and theme-change animations.
 - Contact form: Emails via SMTP (MXroute/Blizzard etc.) using `go-mail`.
@@ -18,7 +18,7 @@ web/ (Next.js)
   ├─ routes/pages (Gallery, About, Gear, Contact)
   ├─ template.tsx (route transitions)
   ├─ rewrites → /api/* (same-origin to avoid CORS)
-  └─ images fetched from /api/img/:id?q=preview|fullsize
+  └─ images fetched from /api/img/:id?q=preview
 
 server/ (Go)
   ├─ /api/cache            # JSON cache
@@ -61,7 +61,7 @@ npm run dev
 
 ## 🔁 Update the album
 
-Trigger cache/thumbnail/fullsize refresh:
+Trigger cache/thumbnail refresh:
 ```
 curl -X POST "http://<GO_HOST>:<PORT>/api/refresh" \
   -H "x-admin-token: <ADMIN_TOKEN>"
@@ -110,5 +110,5 @@ The server prints one access line per request:
 
 ## 🛟 Troubleshooting
 
-- Images refetching: run `/api/refresh` to prefetch; check DATA_DIR/img/{preview,fullsize}.
+- Images refetching: run `/api/refresh` to prefetch; check DATA_DIR/img/preview.
 - No data in UI: confirm `GET /api/cache` returns JSON and Next rewrites point to NEXT_PUBLIC_API_BASE.

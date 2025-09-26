@@ -131,8 +131,6 @@ func GetAsset(ctx context.Context, cfg config.Config, id string) (Asset, error) 
 
 func ImageURL(cfg config.Config, id, q string) string {
 	switch strings.ToLower(q) {
-	case "fullsize":
-		return fmt.Sprintf("%s/api/assets/%s/thumbnail?size=fullsize", cfg.ImmichURL, id)
 	case "thumbnail":
 		fallthrough
 	case "preview":
