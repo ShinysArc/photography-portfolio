@@ -51,13 +51,25 @@ export default function Page() {
   }, []);
 
   const allTags = useMemo(() => {
-    const set = new Map<string, string>();
-    data?.items.forEach((it) =>
-      it.tags?.forEach((t) => set.set(t.id, (t.name || t.value || 'tag').toString())),
-    );
-    return Array.from(set, ([id, label]) => ({ id, label })).sort((a, b) =>
-      a.label.localeCompare(b.label),
-    );
+    const byId = new Map<string, { label: string; count: number }>();
+
+    data?.items.forEach((it) => {
+      it.tags?.forEach((t) => {
+        const id = t.id;
+        const label = (t.name || t.value || 'tag').toString();
+        const prev = byId.get(id);
+        if (prev) {
+          prev.count += 1;
+        } else {
+          byId.set(id, { label, count: 1 });
+        }
+      });
+    });
+
+    // sort: most occurrences first, then A→Z by label
+    return Array.from(byId, ([id, v]) => ({ id, label: v.label, count: v.count }))
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+      .map(({ id, label }) => ({ id, label }));
   }, [data]);
 
   const filtered = useMemo(() => {
