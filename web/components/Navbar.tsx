@@ -1,7 +1,8 @@
 'use client';
 
-import { Camera, Info, Settings2, Mail } from 'lucide-react';
+import { Info, Settings2, Mail } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { ThemeToggle } from './ThemeToggle';
 
@@ -10,8 +11,9 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 backdrop-blur border-b border-border bg-surface/70">
       <nav className="mx-auto w-full max-w-[var(--container-w)] px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Link href="/" prefetch className="flex items-center gap-2 font-semibold">
-            <Camera className="h-5 w-5" /> <span>Gallery</span>
+          <Link href="/" prefetch className="flex items-center font-semibold">
+            <Image src="/icon.svg" alt="" width={30} height={30} className="opacity-90" priority />
+            <span>Gallery</span>
           </Link>
           <Link
             href="/about"
