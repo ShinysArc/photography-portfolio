@@ -68,6 +68,9 @@ server/.env
 server/.env.*
 !server/.env.example
 
+# Cache
+web/public/photos
+
 # -----------------------------
 # Docker/containers (no build artifacts kept)
 # -----------------------------
