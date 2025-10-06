@@ -27,6 +27,7 @@ export type Item = {
   exif: Exif;
   tags: Tag[];
   previewPath?: string; // "preview/<id>.jpg"
+  thumbHash?: string;
 };
 
 export type Cache = { album: { id: string; name: string; assetCount: number }; items: Item[] };
@@ -100,10 +101,25 @@ export default function Page() {
             onClick={() => setSelected(it)}
             className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
           >
-            <Image
+            {it.thumbHash && (
+              <img
+                src={(() => {
+                  const { thumbhashToDataURL } = require('@/lib/thumbhash');
+                  return thumbhashToDataURL(it.thumbHash);
+                })()}
+                alt=""
+                aria-hidden
+                className="w-full h-auto rounded-lg object-cover"
+              />
+            )}
+            <img
               src={`/photos/${it.previewPath}`}
               alt={it.originalFileName || ''}
               loading="lazy"
+              onLoad={(e) => {
+                const el = e.currentTarget;
+                el.previousElementSibling?.remove();
+              }}
               className="w-full h-auto rounded-lg object-cover transition-transform duration-300 hover:scale-[1.02]"
             />
           </button>
@@ -114,7 +130,7 @@ export default function Page() {
         {selected && (
           <div className="flex flex-col lg:flex-row lg:items-start gap-y-6 lg:gap-x-4">
             <div className="shrink-0">
-              <Image
+              <img
                 src={`/photos/${selected.previewPath}`}
                 alt={selected.originalFileName || ''}
                 className="max-h-[85vh] max-w-[85vw] h-auto w-auto object-contain rounded-xl shadow"

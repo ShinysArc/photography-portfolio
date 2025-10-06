@@ -14,11 +14,12 @@ import (
 )
 
 type Item struct {
-	ID               string       `json:"id"`
-	OriginalFileName *string      `json:"originalFileName,omitempty"`
-	Exif             immich.Exif  `json:"exif"`
-	Tags             []immich.Tag `json:"tags"`
-	PreviewPath      string       `json:"previewPath,omitempty"` // "preview/<id>.jpg"
+	ID                 string       `json:"id"`
+	OriginalFileName   *string      `json:"originalFileName,omitempty"`
+	Exif               immich.Exif  `json:"exif"`
+	Tags               []immich.Tag `json:"tags"`
+	PreviewPath        string       `json:"previewPath,omitempty"` // "preview/<id>.jpg"
+	ThumbHash          string       `json:"thumbHash,omitempty"`   // base64, not data URL
 }
 
 type File struct {
@@ -122,6 +123,10 @@ func Refresh(ctx context.Context, cfg config.Config) (File, error) {
 		for i := range out.Items {
 			if p, ok := pathIdx[out.Items[i].ID]; ok {
 				out.Items[i].PreviewPath = p.Preview
+				abs := filepath.Join(cfg.DataDir, out.Items[i].PreviewPath)
+				if th, err := store.ComputeThumbHashFromFile(abs); err == nil {
+					out.Items[i].ThumbHash = th
+				}
 			}
 		}
 	} else {

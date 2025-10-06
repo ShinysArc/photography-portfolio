@@ -2,13 +2,20 @@ package store
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
+	"image"
+	_ "image/jpeg"
+    _ "image/png"
+    _ "golang.org/x/image/webp"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
+
+	thumbhash "github.com/galdor/go-thumbhash"
 
 	"github.com/ShinysArc/photography-portfolio/server/internal/config"
 	"github.com/ShinysArc/photography-portfolio/server/internal/immich"
@@ -37,6 +44,22 @@ var extFromMime = map[string]string{
 	"image/webp": ".webp",
 	"image/png":  ".png",
 	"image/avif": ".avif",
+}
+
+func ComputeThumbHashFromFile(path string) (string, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return "", err
+	}
+	defer func() { _ = f.Close() }()
+
+	img, _, err := image.Decode(f)
+	if err != nil {
+		return "", err
+	}
+
+	h := thumbhash.EncodeImage(img)
+	return base64.StdEncoding.EncodeToString(h), nil
 }
 
 func dirFor(cfg config.Config) string {
