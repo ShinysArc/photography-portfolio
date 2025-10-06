@@ -51,7 +51,6 @@
   margin-bottom: 1rem;
 }
 
-/* Smooth theme change transitions (applied briefly via JS) */
 .theme-transition *,
 .theme-transition *::before,
 .theme-transition *::after {

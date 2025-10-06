@@ -20,16 +20,35 @@ export default function AboutPage() {
       <article className="md:col-span-2 prose dark:prose-invert max-w-none">
         <h1 className="text-2xl font-bold mb-2">About</h1>
         <p>
-          Hey! I’m Stéphane — a software engineer and photographer. This is my online portfolio
-          powered by <strong>Immich</strong> and <strong>Next.js</strong>.
+          I'm Stéphane, and welcome to my photogtaphy portfolio. I've always had a camera close by,
+          what started as a small hobby quickly became something I can't imagine leaving behind.
+          During my time as president of my uni's photography club{' '}
+          <Link
+            href="https://ephemere.photo/"
+            className="relative font-medium text-accent hover:text-accent/90
+                       underline decoration-accent/60 decoration-2 underline-offset-4
+                       transition-colors hover:decoration-accent hover:decoration-4
+                       focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-sm"
+          >
+            Ephemere
+          </Link>
+          , I spent countless nights shooting parties, and events. Those experiences taught me how
+          to capture people's energy, movement, and the atmosphere of a moment before it fades.
         </p>
+
         <p>
-          I love clean compositions, honest light, and candid moments. When I’m not shooting, I’m
-          probably tinkering with my homelab or building developer tools.
+          Outside of events, I take my camera everywhere I go. When I travel, it's always one of the
+          first things I pack. I love taking portraits of friends, wandering through new streets,
+          and finding beauty in small, quiet details that most people might overlook.
         </p>
+
         <p>
-          On this site you’ll find selected projects, travel albums, and the gear I use. If you have
-          a question or a project in mind, feel free to reach out via the{' '}
+          I also enjoy simple walks with no destination, just me and my camera, seeing what catches
+          my eye.
+        </p>
+
+        <p>
+          If you like my work or just want to talk photography, feel free to reach out through the{' '}
           <Link
             href="/contact"
             className="relative font-medium text-accent hover:text-accent/90
