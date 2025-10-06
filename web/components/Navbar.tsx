@@ -12,7 +12,14 @@ export default function Navbar() {
       <nav className="mx-auto w-full max-w-[var(--container-w)] px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/" prefetch className="flex items-center font-semibold">
-            <Image src="/icon.svg" alt="" width={30} height={30} className="opacity-90" priority />
+            <Image
+              src="/icon-512.png"
+              alt=""
+              width={30}
+              height={30}
+              className="opacity-90"
+              priority
+            />
             <span>Gallery</span>
           </Link>
           <Link
