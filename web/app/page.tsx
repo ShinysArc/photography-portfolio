@@ -131,7 +131,7 @@ export default function Page() {
                 <dd>{selected.exif.focalLength ? `${selected.exif.focalLength} mm` : '—'}</dd>
                 <dt className="opacity-70">Aperture</dt>
                 <dd>{selected.exif.fNumber ? `𝘧/${selected.exif.fNumber}` : '—'}</dd>
-                <dt className="opacity-70">Shutter</dt>
+                <dt className="opacity-70">Shutter speed</dt>
                 <dd>{selected.exif.exposureTime ? `${selected.exif.exposureTime}s` : '—'}</dd>
                 <dt className="opacity-70">ISO</dt>
                 <dd>{selected.exif.iso ?? '—'}</dd>
