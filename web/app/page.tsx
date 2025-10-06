@@ -127,14 +127,14 @@ export default function Page() {
                 <dd>{selected.exif.model || '—'}</dd>
                 <dt className="opacity-70">Lens</dt>
                 <dd>{selected.exif.lensModel || '—'}</dd>
+                <dt className="opacity-70">Focal</dt>
+                <dd>{selected.exif.focalLength ? `${selected.exif.focalLength} mm` : '—'}</dd>
                 <dt className="opacity-70">Aperture</dt>
                 <dd>{selected.exif.fNumber ? `𝘧/${selected.exif.fNumber}` : '—'}</dd>
                 <dt className="opacity-70">Shutter</dt>
-                <dd>{selected.exif.exposureTime || '—'}</dd>
+                <dd>{selected.exif.exposureTime ? `${selected.exif.exposureTime}s` : '—'}</dd>
                 <dt className="opacity-70">ISO</dt>
                 <dd>{selected.exif.iso ?? '—'}</dd>
-                <dt className="opacity-70">Focal</dt>
-                <dd>{selected.exif.focalLength ? `${selected.exif.focalLength} mm` : '—'}</dd>
                 <dt className="opacity-70">Taken</dt>
                 <dd>
                   {selected.exif.dateTimeOriginal
