@@ -20,9 +20,9 @@ export default function AboutPage() {
       <article className="md:col-span-2 prose dark:prose-invert max-w-none">
         <h1 className="text-2xl font-bold mb-2">About</h1>
         <p>
-          I'm Stéphane, and welcome to my photogtaphy portfolio. I've always had a camera close by,
-          what started as a small hobby quickly became something I can't imagine leaving behind.
-          During my time as president of my uni's photography club{' '}
+          I&apos;m Stéphane, and welcome to my photogtaphy portfolio. I&apos;ve always had a camera
+          close by, what started as a small hobby quickly became something I can&apos;t imagine
+          leaving behind. During my time as president of my uni&apos;s photography club{' '}
           <Link
             href="https://ephemere.photo/"
             className="relative font-medium text-accent hover:text-accent/90
@@ -33,13 +33,13 @@ export default function AboutPage() {
             Ephemere
           </Link>
           , I spent countless nights shooting parties, and events. Those experiences taught me how
-          to capture people's energy, movement, and the atmosphere of a moment before it fades.
+          to capture people&apos;s energy, movement, and the atmosphere of a moment before it fades.
         </p>
 
         <p>
-          Outside of events, I take my camera everywhere I go. When I travel, it's always one of the
-          first things I pack. I love taking portraits of friends, wandering through new streets,
-          and finding beauty in small, quiet details that most people might overlook.
+          Outside of events, I take my camera everywhere I go. When I travel, it&apos;s always one
+          of the first things I pack. I love taking portraits of friends, wandering through new
+          streets, and finding beauty in small, quiet details that most people might overlook.
         </p>
 
         <p>
